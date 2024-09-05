@@ -1,109 +1,63 @@
-import React, { useEffect, useState } from "react";
-import { fetchProducts } from "../services/api";
-import ProductItem from "./ProductItem";
-import Filter from "./Filters";
-import SearchBar from "./ProductSearch";
-import { useContext } from "react";
-import { CartContext } from "../context/CartContextProvider";
+// src/pages/ProductList.js
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useCart } from '../context/CartContextProvider';
 
-const ProductList = () => {
-  const [products, setProducts] = useState([]);
-  const [filteredProducts, setFilteredProducts] = useState([]);
-  const [categories, setCategories] = useState([]);
+const ProductList = ({ products }) => {
+  const navigate = useNavigate();
+  const { addToCart } = useCart();
 
-  const { dispatch } = useContext(CartContext); // Access the dispatch function from CartContext
-
-  useEffect(() => {
-    fetchProducts().then((response) => {
-      setProducts(response.data);
-      setFilteredProducts(response.data);
-      const uniqueCategories = [
-        ...new Set(response.data.map((product) => product.category)),
-      ];
-      setCategories(uniqueCategories);
-    });
-  }, []);
-
-  const handleFilter = (category, priceRange) => {
-    setFilteredProducts(
-      products.filter(
-        (product) =>
-          (category ? product.category === category : true) &&
-          product.price >= priceRange[0] &&
-          product.price <= priceRange[1]
-      )
-    );
-  };
-
-  const handleClearFilters = () => {
-    setFilteredProducts(products);
-  };
-
-  const handleSearch = (query) => {
-    setFilteredProducts(
-      products.filter(
-        (product) =>
-          product.title &&
-          product.title.toLowerCase().includes(query.toLowerCase())
-      )
-    );
-  };
-
-  // Conversion rate and formatting
-  const conversionRate = 83; // Example conversion rate
-
-  const formatPriceInRupees = (price) => {
-    const priceInRupees = price * conversionRate;
-    return new Intl.NumberFormat("en-IN", {
-      style: "currency",
-      currency: "INR",
-    }).format(priceInRupees);
-  };
-
+  // Function to handle adding product to cart
   const handleAddToCart = (product) => {
-    dispatch({ type: "ADD_TO_CART", payload: product });
+    addToCart(product);
+    navigate('/cart');
   };
 
   return (
-    <div className="container my-5 py-5">
-      <div className="row justify-content-center align-items-center mb-4">
-        <div className="col-md-6 col-lg-auto mb-2 mb-md-0">
-          <SearchBar onSearch={handleSearch} />
-        </div>
-        <div className="col-md-6 col-lg-auto">
-          <Filter
-            categories={categories}
-            onFilter={handleFilter}
-            onClear={handleClearFilters}
-          />
-        </div>
-      </div>
+    <div className="product-list">
+      {products.length === 0 ? (
+        <p>No products available. Please add some!</p>
+      ) : (
+        products.map((product) => (
+          <div key={product.id} className="product-card">
+            <img src={product.image} alt={product.title} className="product-image" />
+            <h2>{product.title}</h2>
+            <p>{product.description}</p>
+            <p>Original Price: ₹{product.originalPrice}</p>
+            <p>Offer Price: ₹{product.offerPrice}</p>
 
-      <div className="row">
-        <div className="col-12 mb-5">
-          <h1 className="display-6 fw-bolder text-center">Available Products</h1>
-        </div>
-      </div>
+            {product.seller && (
+              <>
+                <h3>Seller: {product.seller.name}</h3>
+                <img src={product.seller.logo} alt={product.seller.name} className="seller-logo" />
+                <p>Rating: {product.seller.rating}/5</p>
+                <p>Warranty: {product.seller.warranty}</p>
+              </>
+            )}
 
-      <div className="row">
-        {filteredProducts.length === 0 ? (
-          <div className="col-12">
-            <p>No products available. Try adjusting your filters or search.</p>
-          </div>
-        ) : (
-          filteredProducts.map((product) => (
-            <div className="col-12 col-sm-6 col-md-4 mb-4" key={product.id}>
-              <ProductItem
-                product={{
-                  ...product,
-                  price: formatPriceInRupees(product.price),
-                }}
-                onAddToCart={handleAddToCart}
-              />
+            {/* Review Section */}
+            <div className="product-reviews">
+              <h4>Reviews</h4>
+              {Array.isArray(product.reviews) && product.reviews.length > 0 ? (
+                product.reviews.map((review, index) => (
+                  <div key={index} className="review-card">
+                    <img src={review.image} alt={review.title} className="review-image" />
+                    <h5>{review.title}</h5>
+                    <p>{review.shortDescription}</p>
+                  </div>
+                ))
+              ) : (
+                <p>No reviews available for this product.</p>
+              )}
             </div>
-          ))
-        )}
-      </div>
+
+            {/* Add to Cart Button */}
+            <button className="btn btn-primary" onClick={() => handleAddToCart(product)}>
+              Add to Cart
+            </button>
+          </div>
+        ))
+      )}
     </div>
   );
 };
