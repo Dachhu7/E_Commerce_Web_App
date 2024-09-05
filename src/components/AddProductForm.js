@@ -1,85 +1,91 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import "../styles/AddProductForm.css";
+// AddProductForm.js
+import React, { useState } from 'react';
 
 const AddProductForm = ({ onAddProduct }) => {
   const [product, setProduct] = useState({
-    title: "",
-    image: "",
-    description: "",
-    originalPrice: "",
-    offerPrice: "",
-    reviewTitle: "",
-    reviewImage: "",
-    reviewDescription: "",
-    sellerName: "",
-    sellerLogo: "",
-    rating: "",
-    additionalFeatures: "",
+    title: '',
+    image: '',
+    description: '',
+    originalPrice: '',
+    offerPrice: '',
+    reviews: [{ title: '', image: '', shortDescription: '' }],
+    seller: { name: '', logo: '', rating: '', warranty: '' },
   });
 
-  const navigate = useNavigate();
-
   const handleChange = (e) => {
-    const { name, value, files } = e.target;
-    if (name === "image" || name === "reviewImage" || name === "sellerLogo") {
-      setProduct({ ...product, [name]: files[0] ? URL.createObjectURL(files[0]) : "" });
-    } else {
-      setProduct({ ...product, [name]: value });
-    }
+    const { name, value } = e.target;
+    setProduct((prevProduct) => ({ ...prevProduct, [name]: value }));
+  };
+
+  const handleReviewChange = (index, e) => {
+    const { name, value } = e.target;
+    const updatedReviews = [...product.reviews];
+    updatedReviews[index][name] = value;
+    setProduct({ ...product, reviews: updatedReviews });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onAddProduct(product); // Add new product to the product list
-    navigate("/"); // Redirect to homepage after adding
+    onAddProduct({ ...product, id: Date.now() }); // Adding a unique ID
+    setProduct({
+      title: '',
+      image: '',
+      description: '',
+      originalPrice: '',
+      offerPrice: '',
+      reviews: [{ title: '', image: '', shortDescription: '' }],
+      seller: { name: '', logo: '', rating: '', warranty: '' },
+    });
   };
 
   return (
-    <div className="add-product-form">
-      <h2>Add New Product</h2>
-      <form onSubmit={handleSubmit}>
-        {/* Form fields for product details */}
-        <label>Title:</label>
-        <input type="text" name="title" value={product.title} onChange={handleChange} required />
+    <form onSubmit={handleSubmit}>
+      <h1>Add New Product</h1>
 
-        <label>Image Upload:</label>
-        <input type="file" name="image" onChange={handleChange} accept="image/*" required />
+      <label>Title</label>
+      <input type="text" name="title" value={product.title} onChange={handleChange} required />
 
-        <label>Description:</label>
-        <textarea name="description" value={product.description} onChange={handleChange} required />
+      <label>Image URL</label>
+      <input type="text" name="image" value={product.image} onChange={handleChange} required />
 
-        <label>Original Price:</label>
-        <input type="number" name="originalPrice" value={product.originalPrice} onChange={handleChange} required />
+      <label>Description</label>
+      <textarea name="description" value={product.description} onChange={handleChange} required></textarea>
 
-        <label>Offer Price:</label>
-        <input type="number" name="offerPrice" value={product.offerPrice} onChange={handleChange} required />
+      <label>Original Price</label>
+      <input type="number" name="originalPrice" value={product.originalPrice} onChange={handleChange} required />
 
-        {/* Additional fields for review and seller details */}
-        <label>Review Title:</label>
-        <input type="text" name="reviewTitle" value={product.reviewTitle} onChange={handleChange} />
+      <label>Offer Price</label>
+      <input type="number" name="offerPrice" value={product.offerPrice} onChange={handleChange} required />
 
-        <label>Review Image:</label>
-        <input type="file" name="reviewImage" onChange={handleChange} accept="image/*" />
+      <h2>Seller Details</h2>
+      <label>Seller Name</label>
+      <input type="text" name="seller.name" value={product.seller.name} onChange={handleChange} required />
 
-        <label>Review Description:</label>
-        <textarea name="reviewDescription" value={product.reviewDescription} onChange={handleChange} />
+      <label>Seller Logo URL</label>
+      <input type="text" name="seller.logo" value={product.seller.logo} onChange={handleChange} required />
 
-        <label>Seller Name:</label>
-        <input type="text" name="sellerName" value={product.sellerName} onChange={handleChange} />
+      <label>Seller Rating</label>
+      <input type="number" name="seller.rating" value={product.seller.rating} onChange={handleChange} required />
 
-        <label>Seller Logo:</label>
-        <input type="file" name="sellerLogo" onChange={handleChange} accept="image/*" />
+      <label>Warranty Offer</label>
+      <input type="text" name="seller.warranty" value={product.seller.warranty} onChange={handleChange} required />
 
-        <label>Rating:</label>
-        <input type="number" name="rating" value={product.rating} onChange={handleChange} min="1" max="5" />
+      <h2>Product Reviews</h2>
+      {product.reviews.map((review, index) => (
+        <div key={index}>
+          <label>Review Title</label>
+          <input type="text" name="title" value={review.title} onChange={(e) => handleReviewChange(index, e)} required />
 
-        <label>Additional Features:</label>
-        <textarea name="additionalFeatures" value={product.additionalFeatures} onChange={handleChange} />
+          <label>Review Image URL</label>
+          <input type="text" name="image" value={review.image} onChange={(e) => handleReviewChange(index, e)} required />
 
-        <button type="submit">Add Product</button>
-      </form>
-    </div>
+          <label>Short Description</label>
+          <textarea name="shortDescription" value={review.shortDescription} onChange={(e) => handleReviewChange(index, e)} required></textarea>
+        </div>
+      ))}
+
+      <button type="submit">Add Product</button>
+    </form>
   );
 };
 
