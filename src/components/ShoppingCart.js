@@ -1,13 +1,20 @@
-import React, { useContext } from "react";
-import { CartContext } from "../context/CartContextProvider";
-import { CartItem } from "../components/CartItem";
+// src/components/ShoppingCart.js
+import React from "react";
+import { useCart } from "../context/CartContextProvider";
+import CartItem from "./CartItem"; // Ensure this component is correctly imported
+import "../styles/ShoppingCart.css";
 
-export const ShoppingCart = () => {
-  const { cart } = useContext(CartContext);
+const ShoppingCart = () => {
+  const { cart } = useCart(); // Access cart from context
+
+  if (cart.length === 0) {
+    return <div className="empty-cart">Your cart is empty!</div>;
+  }
+
   return (
-    <div className="container">
-      {cart.map((p) => (
-        <CartItem product={p}></CartItem>
+    <div className="shopping-cart">
+      {cart.map((item) => (
+        <CartItem key={item.id} product={item} />
       ))}
     </div>
   );
