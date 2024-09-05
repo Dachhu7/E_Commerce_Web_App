@@ -29,7 +29,7 @@ const CartPage = () => {
             <button className="btn btn-warning w-100 mb-3">
               <i className="fa fa-shopping-cart"></i> Checkout
             </button>
-            <Link to={`/`} className="btn btn-secondary w-100">
+            <Link to={/} className="btn btn-secondary w-100">
               <i className="fa fa-arrow-left"></i> Continue Shopping
             </Link>
           </div>
