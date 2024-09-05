@@ -1,4 +1,4 @@
-# E-commerce Product Catalog 
+# E-commerce Web App
 
 This project is an e-commerce product catalog built with React.js, utilizing a Mocked RESTful API to fetch product data. The application allows users to browse through a list of products, filter and search for specific items, view detailed product information, and manage a shopping cart.
 
