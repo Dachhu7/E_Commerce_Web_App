@@ -50,9 +50,9 @@ const ProductList = () => {
 
   const formatPriceInRupees = (price) => {
     const priceInRupees = price * conversionRate;
-    return new Intl.NumberFormat('en-IN', {
-      style: 'currency',
-      currency: 'INR'
+    return new Intl.NumberFormat("en-IN", {
+      style: "currency",
+      currency: "INR",
     }).format(priceInRupees);
   };
 
@@ -73,22 +73,27 @@ const ProductList = () => {
 
       <div className="row">
         <div className="col-12 mb-5">
-          <h1 className="display-6 fw-bolder text-center">
-            Available Products
-          </h1>
+          <h1 className="display-6 fw-bolder text-center">Available Products</h1>
         </div>
       </div>
+
       <div className="row">
-        {filteredProducts.map((product) => (
-          <div className="col-12 col-sm-6 col-md-4 mb-4" key={product.id}>
-            <ProductItem
-              product={{
-                ...product,
-                price: formatPriceInRupees(product.price)
-              }}
-            />
+        {filteredProducts.length === 0 ? (
+          <div className="col-12">
+            <p>No products available. Try adjusting your filters or search.</p>
           </div>
-        ))}
+        ) : (
+          filteredProducts.map((product) => (
+            <div className="col-12 col-sm-6 col-md-4 mb-4" key={product.id}>
+              <ProductItem
+                product={{
+                  ...product,
+                  price: formatPriceInRupees(product.price),
+                }}
+              />
+            </div>
+          ))
+        )}
       </div>
     </div>
   );
