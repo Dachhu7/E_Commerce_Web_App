@@ -1,10 +1,11 @@
-import React, { useContext } from "react";
+// src/components/MenuBar.js
+import React from "react";
 import { Link } from "react-router-dom";
-import { CartContext } from "../context/CartContextProvider";
+import { useCart } from "../context/CartContextProvider"; // Use useCart instead of CartContext
 import "../styles/MenuBar.css"; 
 
 function SearchBar() {
-  const { cart } = useContext(CartContext);
+  const { cart } = useCart(); // Use useCart to access cart context
   return (
     <div className="sticky-navbar"> 
       <nav className="navbar navbar-expand-lg bg-body-tertiary py-3 shadow-sm">
@@ -25,4 +26,3 @@ function SearchBar() {
 }
 
 export default SearchBar;
-
