@@ -38,3 +38,9 @@ Continue shopping or proceed to checkout.
 
 ### 5.Local Storage
 The shopping cart state is persisted using local storage, ensuring that the cart retains its state even after a page refresh.
+
+### 6.Cntributing
+- Fork the repository and submit a pull request for improvements or bug fixes.
+
+### 7.Author
+[Darshan Kudache](https://www.linkedin.com/in/darshan-kudache-a4369328b)
