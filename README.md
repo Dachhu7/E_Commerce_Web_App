@@ -8,7 +8,6 @@ Follow these steps to set up and run the project locally:
 ### 1.Install Dependencies
 Navigate into the project directory and install the necessary dependencies using npm or yarn:
 
-#### `cd e-commerce-product-catalog`
 #### `npm install`
 or
 #### `yarn install`
