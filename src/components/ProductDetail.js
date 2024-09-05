@@ -1,13 +1,13 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { fetchProductById } from "../services/api";
-import { CartContext } from "../context/CartContextProvider";
+import { useCart } from "../context/CartContextProvider"; // Use the correct custom hook
 import "../styles/ProductDetail.css";
 
 const ProductDetail = () => {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
-  const { dispatch } = useContext(CartContext);
+  const { dispatch } = useCart(); // Access dispatch from useCart
 
   useEffect(() => {
     fetchProductById(id).then((response) => {
@@ -26,6 +26,10 @@ const ProductDetail = () => {
     style: 'currency',
     currency: 'INR'
   }).format(priceInRupees);
+
+  const handleAddToCart = () => {
+    dispatch({ type: "ADD_ITEM", product: { ...product, quantity: 1 } });
+  };
 
   return (
     <div className="product-detail-container">
@@ -48,7 +52,7 @@ const ProductDetail = () => {
           <p className="product-description">{product.description}</p>
           <button
             className="btn btn-outline-dark go-to-cart-btn"
-            onClick={() => dispatch({ type: "ADD_ITEM", product: product })}
+            onClick={handleAddToCart} // Correctly use the handleAddToCart function
           >
             <i className="fa fa-shopping-cart"></i> Add to Cart
           </button>
