@@ -1,17 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
+import { CartContext } from "../context/CartContextProvider";
+import { CartItem } from "../components/CartItem";
 
-const CONVERSION_RATE = 83;
-
-export const CartItem = ({ product }) => {
-  const { name, priceInDollars } = product;
-  const priceInRupees = (priceInDollars * CONVERSION_RATE).toFixed(2);
-
+export const ShoppingCart = () => {
+  const { cart } = useContext(CartContext);
   return (
-    <div className="cart-item">
-      <h2>{name}</h2>
-      <p>Price: ₹{priceInRupees}</p>
+    <div className="container">
+      {cart.map((p) => (
+        <CartItem product={p}></CartItem>
+      ))}
     </div>
   );
 };
 
-export default CartItem;
+export default ShoppingCart;
