@@ -5,8 +5,15 @@ import { totalItem, totalPrice } from "../context/CartContextReducer";
 import "../styles/Summary.css";
 import { Link } from "react-router-dom";
 
+const CONVERSION_RATE = 83; // 1 USD = 83 INR
+
 const CartPage = () => {
   const { cart } = useContext(CartContext);
+  
+  // Convert total price from dollars to rupees
+  const totalPriceInDollars = totalPrice(cart);
+  const totalPriceInRupees = (totalPriceInDollars * CONVERSION_RATE).toFixed(2);
+
   return (
     <div className="container mt-4">
       <div className="row">
@@ -19,7 +26,7 @@ const CartPage = () => {
               Total Items: <b>{totalItem(cart)}</b>
             </h5>
             <h5>
-              Total Price: <b>${totalPrice(cart).toFixed(2)}</b>
+              Total Price: <b>₹{totalPriceInRupees}</b>
             </h5>
             <button className="btn btn-warning w-100 mb-3">
               <i className="fa fa-shopping-cart"></i> Checkout
