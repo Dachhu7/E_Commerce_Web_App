@@ -3,11 +3,15 @@ import { fetchProducts } from "../services/api";
 import ProductItem from "./ProductItem";
 import Filter from "./Filters";
 import SearchBar from "./ProductSearch";
+import { useContext } from "react";
+import { CartContext } from "../context/CartContextProvider";
 
 const ProductList = () => {
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [categories, setCategories] = useState([]);
+
+  const { dispatch } = useContext(CartContext); // Access the dispatch function from CartContext
 
   useEffect(() => {
     fetchProducts().then((response) => {
@@ -56,6 +60,10 @@ const ProductList = () => {
     }).format(priceInRupees);
   };
 
+  const handleAddToCart = (product) => {
+    dispatch({ type: "ADD_TO_CART", payload: product });
+  };
+
   return (
     <div className="container my-5 py-5">
       <div className="row justify-content-center align-items-center mb-4">
@@ -90,6 +98,7 @@ const ProductList = () => {
                   ...product,
                   price: formatPriceInRupees(product.price),
                 }}
+                onAddToCart={handleAddToCart}
               />
             </div>
           ))
