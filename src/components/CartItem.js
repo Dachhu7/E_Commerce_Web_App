@@ -3,6 +3,9 @@ import { CartContext } from "../context/CartContextProvider";
 import { Link } from "react-router-dom";
 import "../styles/CartItem.css";
 
+// Define the conversion rate (1 USD to INR)
+const USD_TO_INR_CONVERSION_RATE = 82; // Example rate; you might want to update it dynamically
+
 export const CartItem = ({ product }) => {
   const { cart, dispatch } = useContext(CartContext);
 
@@ -18,12 +21,15 @@ export const CartItem = ({ product }) => {
     dispatch({ type: "REMOVE", id });
   };
 
+  // Convert the price to rupees
+  const priceInRupees = product.price * USD_TO_INR_CONVERSION_RATE;
+
   return (
     <div className="cart-item">
       <img src={product.image} alt={product.title} />
       <div className="details">
         <h4>{product.title}</h4>
-        <h5>${product.price}</h5>
+        <h5>₹{priceInRupees.toFixed(2)}</h5> {/* Display price in rupees */}
         <div className="buttons-abc">
           <button
             className="btn btn-outline-dark"
