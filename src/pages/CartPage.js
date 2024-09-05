@@ -1,27 +1,30 @@
-import React, { useContext } from "react";
-import { CartContext } from "../context/CartContextProvider";
-import { ShoppingCart } from "../components/ShoppingCart";
-import { totalItem, totalPrice } from "../context/CartContextReducer";
-import "../styles/Summary.css";
+// src/pages/CartPage.js
+import React from "react";
+import { useCart } from "../context/CartContextProvider";
+import ShoppingCart from "../components/ShoppingCart"; // Correct import
+import "../styles/CartPage.css"; // Ensure you have styles for CartPage
 import { Link } from "react-router-dom";
 
-// You can adjust the conversion rate based on current exchange rates
 const CONVERSION_RATE = 82; // Example rate, 1 USD = 82 INR
 
 const CartPage = () => {
-  const { cart } = useContext(CartContext);
-  const totalPriceInRupees = totalPrice(cart) * CONVERSION_RATE;
+  const { cart } = useCart(); // Use useCart
+
+  // Calculate total items and price
+  const totalItem = cart.reduce((acc, item) => acc + item.quantity, 0);
+  const totalPrice = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
+  const totalPriceInRupees = totalPrice * CONVERSION_RATE;
 
   return (
     <div className="container mt-4">
       <div className="row">
         <div className="col-12 col-lg-8 mb-4">
-          <ShoppingCart />
+          <ShoppingCart /> {/* Display cart items */}
         </div>
         <div className="col-12 col-lg-4">
           <div className="summary p-3">
             <h5>
-              Total Items: <b>{totalItem(cart)}</b>
+              Total Items: <b>{totalItem}</b>
             </h5>
             <h5>
               Total Price: <b>₹{totalPriceInRupees.toFixed(2)}</b>
