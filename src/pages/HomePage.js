@@ -12,7 +12,6 @@ const HomePage = () => {
       <Link to="/add-product">
         <button className="btn btn-primary">Add Product</button>
       </Link>
-      <ProductList products={demoProducts} /> {/* Pass demo products */}
     </div>
   );
 };
