@@ -1,0 +1,52 @@
+.filter {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  font-family: "Poppins";
+  justify-content: center;
+  gap: 10px;
+}
+
+.filter select,
+.filter input[type="number"] {
+  margin-right: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  flex: 1;
+}
+
+.filter button {
+  padding: 8px 16px;
+  margin-right: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #d3d3d3;
+  color: #778899;
+  cursor: pointer;
+}
+
+.filter button:hover {
+  background-color: #ffd700;
+  color: #000;
+}
+
+.filter button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+@media (max-width: 768px) {
+  .filter {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .filter select,
+  .filter input[type="number"],
+  .filter button {
+    margin-right: 0;
+    margin-bottom: 10px;
+    flex: none;
+  }
+}
