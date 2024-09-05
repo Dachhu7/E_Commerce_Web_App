@@ -1,5 +1,6 @@
-import React, { useContext } from "react";
-import { CartContext } from "../context/CartContextProvider";
+// src/components/CartItem.js
+import React from "react";
+import { useCart } from "../context/CartContextProvider";
 import { Link } from "react-router-dom";
 import "../styles/CartItem.css";
 
@@ -7,7 +8,7 @@ import "../styles/CartItem.css";
 const USD_TO_INR_CONVERSION_RATE = 82; // Example rate; you might want to update it dynamically
 
 export const CartItem = ({ product }) => {
-  const { cart, dispatch } = useContext(CartContext);
+  const { cart, dispatch } = useCart(); // Use useCart instead of useContext
 
   const Increase = (id) => {
     dispatch({ type: "INCREASE_QUANTITY", id });
@@ -49,8 +50,7 @@ export const CartItem = ({ product }) => {
           Remove
         </button>
         <Link to={`/`} className="btn-continue">
-          <i className="fa fa-arrow-left"></i> {""}
-          Continue Shopping
+          <i className="fa fa-arrow-left"></i> Continue Shopping
         </Link>
       </div>
     </div>
