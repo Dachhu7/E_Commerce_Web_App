@@ -1,4 +1,4 @@
-// src/pages/ProductList.js
+
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useCart } from '../context/CartContextProvider';

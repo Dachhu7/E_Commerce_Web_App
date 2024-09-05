@@ -9,7 +9,6 @@ import SearchBar from './components/MenuBar';
 const App = () => {
   const [products, setProducts] = useState([]); // State for product list
 
-  // Function to handle adding new product
   const handleAddProduct = (newProduct) => {
     setProducts((prevProducts) => [...prevProducts, newProduct]);
   };
