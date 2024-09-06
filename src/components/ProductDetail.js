@@ -1,4 +1,5 @@
-import React, { useContext, useEffect, useState } from "react";
+// src/components/ProductDetail.js
+import React, { useEffect, useState } from "react"; // Removed unused `useContext`
 import { useParams, Link } from "react-router-dom";
 import { fetchProductById } from "../services/api";
 import { useCart } from "../context/CartContextProvider"; // Use the correct custom hook

@@ -1,24 +1,22 @@
-// src/components/CartItem.js
 import React from "react";
 import { useCart } from "../context/CartContextProvider";
-import { Link } from "react-router-dom";
 import "../styles/CartItem.css";
 
 // Define the conversion rate (1 USD to INR)
-const USD_TO_INR_CONVERSION_RATE = 82; // Example rate; you might want to update it dynamically
+const USD_TO_INR_CONVERSION_RATE = 82;
 
 export const CartItem = ({ product }) => {
-  const { cart, dispatch } = useCart(); // Use useCart instead of useContext
+  const { dispatch } = useCart();
 
-  const Increase = (id) => {
+  const increaseQuantity = (id) => {
     dispatch({ type: "INCREASE_QUANTITY", id });
   };
 
-  const Decrease = (id) => {
+  const decreaseQuantity = (id) => {
     dispatch({ type: "DECREASE_QUANTITY", id });
   };
 
-  const Remove = (id) => {
+  const remove = (id) => {
     dispatch({ type: "REMOVE", id });
   };
 
@@ -30,28 +28,22 @@ export const CartItem = ({ product }) => {
       <img src={product.image} alt={product.title} />
       <div className="details">
         <h4>{product.title}</h4>
-        <h5>₹{priceInRupees.toFixed(2)}</h5> {/* Display price in rupees */}
-        <div className="buttons-abc">
-          <button
-            className="btn btn-outline-dark"
-            onClick={() => Decrease(product.id)}
-          >
+        <h5>₹{priceInRupees.toFixed(2)}</h5>
+        <div className="quantity-buttons">
+          <button className="btn btn-outline-dark" onClick={() => decreaseQuantity(product.id)}>
             <b>-</b>
           </button>
-          <button className="rounded">{product.quantity}</button>
-          <button
-            className="btn btn-outline-dark"
-            onClick={() => Increase(product.id)}
-          >
+          <button className="quantity-display">{product.quantity}</button>
+          <button className="btn btn-outline-dark" onClick={() => increaseQuantity(product.id)}>
             <b>+</b>
           </button>
         </div>
-        <button className="btn-remove" onClick={() => Remove(product.id)}>
+        <button className="btn-remove" onClick={() => remove(product.id)}>
           Remove
         </button>
-        <Link to={`/`} className="btn-continue">
-          <i className="fa fa-arrow-left"></i> Continue Shopping
-        </Link>
+        <button className="btn-buy" onClick={() => alert('Buy functionality not implemented')}>
+          Buy
+        </button>
       </div>
     </div>
   );

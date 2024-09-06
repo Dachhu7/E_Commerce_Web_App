@@ -1,4 +1,4 @@
-// AddProductForm.js
+// src/pages/AddProductForm.js
 import React, { useState } from 'react';
 
 const AddProductForm = ({ onAddProduct }) => {
@@ -14,7 +14,17 @@ const AddProductForm = ({ onAddProduct }) => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setProduct((prevProduct) => ({ ...prevProduct, [name]: value }));
+    if (name.startsWith('seller.')) {
+      setProduct((prevProduct) => ({
+        ...prevProduct,
+        seller: {
+          ...prevProduct.seller,
+          [name.split('.')[1]]: value,
+        },
+      }));
+    } else {
+      setProduct((prevProduct) => ({ ...prevProduct, [name]: value }));
+    }
   };
 
   const handleReviewChange = (index, e) => {
@@ -41,7 +51,7 @@ const AddProductForm = ({ onAddProduct }) => {
   return (
     <form onSubmit={handleSubmit}>
       <h1>Add New Product</h1>
-
+      {/* Form fields for product details */}
       <label>Title</label>
       <input type="text" name="title" value={product.title} onChange={handleChange} required />
 

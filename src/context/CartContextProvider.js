@@ -1,31 +1,45 @@
+// src/context/CartContextProvider.js
 import React, { createContext, useReducer, useContext } from 'react';
 
-// Initialize the context
 const CartContext = createContext();
 
-// Reducer function to handle cart actions
 const cartReducer = (state, action) => {
   switch (action.type) {
-    case "ADD_ITEM":
-      return [...state, { ...action.product, quantity: 1 }];
-    case "INCREASE_QUANTITY":
+    case 'ADD_ITEM':
+      // Check if the item is already in the cart
+      const existingItemIndex = state.findIndex(item => item.id === action.product.id);
+      if (existingItemIndex >= 0) {
+        // If item exists, update quantity
+        const updatedCart = state.map((item, index) =>
+          index === existingItemIndex
+            ? { ...item, quantity: item.quantity + action.product.quantity }
+            : item
+        );
+        return updatedCart;
+      }
+      // If item does not exist, add new item to the cart
+      return [...state, action.product];
+      
+    case 'REMOVE':
+      return state.filter(item => item.id !== action.id);
+      
+    case 'INCREASE_QUANTITY':
       return state.map(item =>
         item.id === action.id ? { ...item, quantity: item.quantity + 1 } : item
       );
-    case "DECREASE_QUANTITY":
+      
+    case 'DECREASE_QUANTITY':
       return state.map(item =>
-        item.id === action.id ? { ...item, quantity: item.quantity - 1 } : item
-      ).filter(item => item.quantity > 0); // Remove items with zero quantity
-    case "REMOVE":
-      return state.filter(item => item.id !== action.id);
+        item.id === action.id && item.quantity > 1 ? { ...item, quantity: item.quantity - 1 } : item
+      );
+      
     default:
       return state;
   }
 };
 
-// CartContextProvider component
-const CartContextProvider = ({ children }) => {
-  const [cart, dispatch] = useReducer(cartReducer, JSON.parse(localStorage.getItem('cart')) || []);
+export const CartProvider = ({ children }) => {
+  const [cart, dispatch] = useReducer(cartReducer, []);
 
   return (
     <CartContext.Provider value={{ cart, dispatch }}>
@@ -34,7 +48,4 @@ const CartContextProvider = ({ children }) => {
   );
 };
 
-// Custom hook to use the CartContext
-const useCart = () => useContext(CartContext);
-
-export { CartContextProvider, useCart };
+export const useCart = () => useContext(CartContext);

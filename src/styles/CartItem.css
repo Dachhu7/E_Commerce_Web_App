@@ -1,68 +1,94 @@
+/* src/styles/CartItem.css */
 .cart-item {
   display: flex;
-  border: 1px solid #ccc;
-  border-radius: 25px;
-  margin-top: 1rem;
-  padding: 25px;
-  font-family: "Poppins";
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 10px;
 }
 
 .cart-item img {
-  width: 25%;
-  height: 25%;
+  width: 100px;
+  height: auto;
+  border-radius: 8px;
 }
 
-.cart-item .details {
+.details {
+  flex: 1;
   margin-left: 20px;
 }
 
-.cart-item h4,
-.cart-item h5 {
-  margin: 0.5rem 0;
+.details h4, .details h5 {
+  margin: 0;
+  padding: 5px 0;
 }
 
-.cart-item .buttons {
-  align-content: left;
+.buttons-abc {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
 }
 
-.cart-item .buttons-abc {
-  margin-top: 0.5rem;
-  margin-bottom: 0.5rem;
+.buttons-abc button {
+  width: 30px;
+  height: 30px;
+  margin: 0 10px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 50%;
 }
 
-.cart-item .buttons-abc .rounded {
-  border: none;
-  background-color: white;
-  margin-left: 1rem;
-  margin-right: 1rem;
-  padding: 5px;
-}
-
-.cart-item .btn-remove {
-  background-color: #ffc107;
+.btn-remove {
+  background-color: #ff4d4d;
   color: white;
   border: none;
-  border-radius: 10px;
-  padding: 0.5rem 1rem;
+  padding: 10px 20px;
+  border-radius: 5px;
   cursor: pointer;
-  margin-right: 10px;
-  color: #000;
+  margin-top: 10px;
 }
 
-.cart-item .btn-remove:hover {
-  background-color: #000000;
-  color: #fff;
+.btn-remove:hover {
+  background-color: #cc0000;
 }
 
-.cart-item .btn-continue {
-  font-family: "Poppins";
-  padding: 0.5rem 0.5rem;
+.btn-continue {
+  margin-top: 15px;
+  display: inline-block;
   text-decoration: none;
-  color: #000;
-  border-radius: 10px;
-  background-color: #f8f9fa;
+  color: white;
+  background-color: #007bff;
+  padding: 10px 15px;
+  border-radius: 5px;
 }
 
-.cart-item .btn-continue:hover {
-  background-color: #d2d2d2;
+.btn-continue:hover {
+  background-color: #0056b3;
+}
+.cart-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.cart-item img {
+  width: 100px;
+  height: auto;
+  margin-right: 20px;
+}
+
+.details {
+  flex-grow: 1;
+}
+
+.quantity-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.btn-remove {
+  background-color: red;
+  color: white;
 }

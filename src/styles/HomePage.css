@@ -1,0 +1,80 @@
+/* src/styles/HomePage.css */
+.home-page {
+    padding: 20px;
+    background-color: #f8f9fa; /* Light background for better contrast */
+    text-align: center; /* Center the title */
+  }
+  
+  .header {
+    margin-bottom: 20px;
+  }
+  
+  .header h1 {
+    font-size: 28px;
+    margin-bottom: 15px;
+  }
+  
+  .header-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px; /* Spacing between buttons */
+    margin-bottom: 20px;
+  }
+  
+  .btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .btn-primary {
+    background-color: #28a745;
+    color: white;
+  }
+  
+  .btn-primary:hover {
+    background-color: #218838;
+  }
+  
+  .btn-cart {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  .btn-cart:hover {
+    background-color: #0056b3;
+  }
+  
+  .product-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px; /* Added gap for spacing between cards */
+  }
+  .home-page {
+    padding: 20px;
+    background-color: #f8f9fa; /* Light background for better contrast */
+  }
+  
+  .header {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .header-buttons {
+    margin-bottom: 20px;
+  }
+  
+  .header-buttons .btn {
+    margin: 0 10px;
+  }
+  
+  .product-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 20px; /* Added gap for spacing between cards */
+  }
+  
