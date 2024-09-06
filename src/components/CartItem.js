@@ -38,10 +38,10 @@ export const CartItem = ({ product }) => {
             <b>+</b>
           </button>
         </div>
-        <button className="btn-remove" onClick={() => remove(product.id)}>
+        <button className="btn2" onClick={() => remove(product.id)}>
           Remove
         </button>
-        <button className="btn-buy" onClick={() => alert('Buy functionality not implemented')}>
+        <button className="btn1" onClick={() => alert('Buy functionality not implemented')}>
           Buy
         </button>
       </div>

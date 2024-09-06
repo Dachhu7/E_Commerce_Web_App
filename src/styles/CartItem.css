@@ -1,7 +1,6 @@
 /* src/styles/CartItem.css */
 .cart-item {
   display: flex;
-  justify-content: space-between;
   align-items: center;
   padding: 20px;
   border-bottom: 1px solid #ddd;
@@ -12,11 +11,11 @@
   width: 100px;
   height: auto;
   border-radius: 8px;
+  margin-right: 20px;
 }
 
 .details {
-  flex: 1;
-  margin-left: 20px;
+  flex-grow: 1;
 }
 
 .details h4, .details h5 {
@@ -24,19 +23,22 @@
   padding: 5px 0;
 }
 
-.buttons-abc {
+.quantity-controls {
   display: flex;
   align-items: center;
+  gap: 10px;
   margin-top: 10px;
 }
 
-.buttons-abc button {
-  width: 30px;
-  height: 30px;
+.quantity-buttons {
+  display: flex;
+  align-items: center;
+}
+
+.quantity-display {
   margin: 0 10px;
-  font-size: 16px;
-  font-weight: bold;
-  border-radius: 50%;
+  padding: 5px;
+  border: 1px solid #ddd;
 }
 
 .btn-remove {
@@ -53,42 +55,15 @@
   background-color: #cc0000;
 }
 
-.btn-continue {
-  margin-top: 15px;
-  display: inline-block;
-  text-decoration: none;
-  color: white;
+.btn-buy {
   background-color: #007bff;
-  padding: 10px 15px;
-  border-radius: 5px;
-}
-
-.btn-continue:hover {
-  background-color: #0056b3;
-}
-.cart-item {
-  display: flex;
-  align-items: center;
-  margin-bottom: 20px;
-}
-
-.cart-item img {
-  width: 100px;
-  height: auto;
-  margin-right: 20px;
-}
-
-.details {
-  flex-grow: 1;
-}
-
-.quantity-controls {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.btn-remove {
-  background-color: red;
   color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.btn-buy:hover {
+  background-color: #0056b3;
 }

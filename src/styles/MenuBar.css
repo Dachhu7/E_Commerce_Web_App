@@ -1,6 +1,5 @@
 .sticky-navbar {
-  position: -webkit-sticky;
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-}
+    position: static; /* Or use 'relative' */
+    top: auto;        /* Remove fixed positioning */
+    z-index: 1;       /* Optional */
+  }

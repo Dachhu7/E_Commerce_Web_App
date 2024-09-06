@@ -22,7 +22,7 @@ const ProductList = ({ products }) => {
             <img src={product.image} alt={product.title} className="product-image" />
             <h2>{product.title}</h2>
             <p>{product.description}</p>
-            <p>Original Price: ₹{product.originalPrice}</p>
+            <p>Original Price: ₹{product.Price}</p>
             <p>Offer Price: ₹{product.offerPrice}</p>
 
             {product.seller && (

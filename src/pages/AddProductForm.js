@@ -50,7 +50,7 @@ const AddProductForm = ({ onAddProduct }) => {
         <textarea name="description" value={product.description} onChange={handleChange} required />
 
         <label>Original Price:</label>
-        <input type="number" name="originalPrice" value={product.originalPrice} onChange={handleChange} required />
+        <input type="number" name="originalPrice" value={product.price} onChange={handleChange} required />
 
         <label>Offer Price:</label>
         <input type="number" name="offerPrice" value={product.offerPrice} onChange={handleChange} required />

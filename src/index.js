@@ -6,10 +6,8 @@ import App from './App';
 import { CartProvider } from './context/CartContextProvider'; // Import CartProvider, not CartContextProvider
 
 ReactDOM.render(
-  <React.StrictMode>
-    <CartProvider>
-      <App />
-    </CartProvider>
-  </React.StrictMode>,
+  <CartProvider>
+    <App />
+  </CartProvider>,
   document.getElementById('root')
 );

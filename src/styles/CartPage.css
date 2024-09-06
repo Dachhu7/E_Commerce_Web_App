@@ -44,7 +44,7 @@
 .summary {
   margin-top: 20px;
   padding: 10px;
-  border: 1px solid #ddd;
+  border-top: 1px solid #ddd;
   border-radius: 8px;
   background-color: #fff;
   font-size: 18px;
@@ -55,6 +55,75 @@
   color: #333;
 }
 
-.summary .checkout-button {
-  margin-top: 20px;
+/* Shared button styles for all buttons */
+.btn {
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  color: white;
+  margin-left: 10px;
+  transition: background-color 0.3s ease;
 }
+
+/* "Buy" button specific style */
+.btn-buy {
+  background-color: #007bff;
+}
+
+.btn-buy:hover {
+  background-color: #0056b3;
+}
+
+/* "Remove" button specific style */
+.btn-remove {
+  background-color: #ff4d4d;
+}
+
+.btn-remove:hover {
+  background-color: #cc0000;
+}
+
+/* Checkout button */
+.checkout-button {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.checkout-button:hover {
+  background-color: #218838;
+}
+
+/* src/styles/CartPage.css */
+
+/* Shared button styles */
+.btn1 {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 8px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-left: 10px;
+}
+.btn2 {
+  background-color: #fe0000;
+  color: white;
+  border: none;
+  padding: 8px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-left: 10px;
+}
+
+.btn:hover {
+  background-color: #8ef85d;
+}
+

@@ -10,7 +10,7 @@ const HomePage = ({ products }) => {
     {
       id: 1,
       title: 'Wireless Bluetooth Headphones',
-      price: 89.99,
+      price: 50.99,
       description: 'High-quality wireless Bluetooth headphones with noise-cancelling feature and long battery life.',
       image: '/demo1.jpeg'
     },
